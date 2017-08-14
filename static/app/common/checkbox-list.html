@@ -1,0 +1,83 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="checkbox-list">
+	<template>
+	  <style include="shared-styles">
+	    :host {
+	      display: block;	      
+	    }
+
+	    .listitem {
+	    	background: #FFF;
+	    	margin-top: 3px;
+	    	margin-left: 3px;
+	    	margin-right: 3px;
+	    	font-size: 13px;
+	    	font-weight: 600;
+	    }
+
+	    paper-checkbox{
+	      --paper-checkbox-checked-color: #2f4050;          
+	      --paper-checkbox-unchecked-color: #e7eaec;
+          --paper-checkbox-label-color: #333;
+          --paper-checkbox-label-spacing: 0;
+	      --paper-checkbox-margin: 8px 16px 8px 0;
+	    }
+
+	    paper-checkbox:hover{
+	      --paper-checkbox-unchecked-color: #2f4050;
+	    }
+	  </style>
+
+	  <div class="card">
+	  	<dom-repeat items="[[items]]">
+	      <template>
+	        <div class="listitem">	        
+	          <paper-checkbox data-index$="{{index}}" checked$="{{item.checked}}" on-iron-change="_changeListItem" noink>[[item.name]]</paper-checkbox>
+	        </div>
+	      </template>
+	    </dom-repeat>
+	  </div>
+	</template>
+	<script>
+	  class CheckboxList extends Polymer.Element {
+	  	static get is() { return 'checkbox-list'; }
+
+	  	static get properties() {
+  		  return {
+  		    items: {
+  		      type: Array  		      	     
+  		    },
+  		    width: {
+  		      type: Number
+  		    },
+  		    height: {
+  		      type: Number
+  		    }
+  		  };
+	  	}
+
+	  	constructor() {
+	  	  super();
+
+	  	  this.items = [{name: "Medical device", checked: true},{name: "Extrinsic material", checked: false},{name: "Post operation", checked: false},{name: "etc", checked: true}];
+	  	}
+
+	  	_changeListItem(e) {
+	  	  const dataIndex = e.currentTarget.getAttribute("data-index");
+	  	  let checked = e.currentTarget.checked;
+
+	  	  if(this.items[dataIndex]!=undefined){
+	  	    this.items[dataIndex].checked = checked;
+	  	  }	  	  
+
+	  	  console.log(this.items);
+	  	}
+	  }
+
+	  customElements.define(CheckboxList.is, CheckboxList);
+	</script>
+</dom-module>

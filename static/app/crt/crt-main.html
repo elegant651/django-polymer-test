@@ -1,0 +1,79 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/vaadin-split-layout/vaadin-split-layout.html">
+
+<link rel="import" href="../common/top-header.html">
+<link rel="import" href="../common/radiobox-list.html">
+<link rel="import" href="../common/checkbox-list.html">
+
+<dom-module id="crt-main">
+	<template>
+	  <style>
+	    :host {
+	      width: 100%;
+	      background-color: #000;
+	    }
+
+	  	.container {
+	  	  @apply --layout-horizontal;
+	  	  max-width: 800px;
+	  	  margin: 0 auto;
+	  	}
+
+	  	.container > * {
+          @apply --layout-flex;
+        }        
+
+		vaadin-split-layout > div {
+		  @apply --layout;
+		  @apply --layout-center-center;
+		}        
+
+		vaadin-split-layout .topWrapper {
+			height: 300px;
+		}
+
+		vaadin-split-layout .bottomWrapper {
+			min-height: 300px;
+		}
+
+        checkbox-list {
+       	  width: 300px;
+       	  height: 200px;
+        }
+	  </style>
+	  <app-header-layout fullbleed>
+	  	<app-header slot="header" fixed reveals effects="waterfall">
+	  	  <top-header></top-header>	  	  
+	    </app-header>
+	    
+	    <section id="main">
+	      <div class="container">
+	      	<vaadin-split-layout vertical>
+	          <div class="topWrapper">	  
+	            <radiobox-list></radiobox-list>       
+	            <checkbox-list></checkbox-list>
+	          </div>
+	          <div class="bottomWrapper">Bottom content element</div>
+	        </vaadin-split-layout>
+	      </div>
+	    </section>	    
+	  </app-header-layout>
+	</template>
+	<script>
+	  class CrtMain extends Polymer.Element {
+	    static get is() { return 'crt-main'; }
+
+	    static get properties() {
+	      return {
+
+	      }
+	    }
+
+	  }
+
+	  window.customElements.define(CrtMain.is, CrtMain);
+	</script>
+</dom-module>

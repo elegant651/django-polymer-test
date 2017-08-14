@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="radiobox-list">
+	<template>
+	  <style include="shared-styles">
+	    :host {
+	      display: block;	      
+	    }	    
+
+	    paper-radio-group{
+	      @apply --layout-horizontal;
+	      --paper-radio-group-item-padding: 8px;
+	      font-size: 13px;
+	      font-weight: 600;
+	    }
+
+	    paper-radio-button{
+	      --paper-radio-button-checked-color: #2f4050;          
+	      --paper-radio-button-unchecked-color: #e7eaec;
+          --paper-radio-button-label-color: #333;
+          --paper-radio-button-label-spacing: 8px;          
+	    }
+
+	    paper-radio-button:hover{
+	      --paper-radio-button-unchecked-color: #2f4050;
+	    }
+	  </style>
+
+	  <div class="card">
+	  	<paper-radio-group id="pgItems" on-paper-radio-group-changed="_changeCheckItem" allow-empty-selection>
+	  	  <dom-repeat items="[[items]]">
+	        <template>	          
+	          <paper-radio-button name$="{{index}}" checked$="{{item.checked}}" noink>[[item.name]]</paper-checkbox>	          
+	        </template>
+	      </dom-repeat>
+	    </paper-radio-group>
+	  </div>
+	</template>
+	<script>
+	  class RadioboxList extends Polymer.Element {
+	  	static get is() { return 'radiobox-list'; }
+
+	  	static get properties() {
+  		  return {
+  		    items: {
+  		      type: Array
+  		    },
+  		    width: {
+  		      type: Number
+  		    },
+  		    height: {
+  		      type: Number
+  		    }
+  		  };
+	  	}
+
+	  	constructor() {
+	  	  super();
+
+	  	  this.items = [{name: "Focal", checked: false},{name: "Multi Focal", checked: false},{name: "Diffuse", checked: false}];
+	  	}
+
+	  	_changeCheckItem(e) {
+	  	  const dataIndex = this.$.pgItems.selected;
+	  	  
+	  	  for(const i in this.items){
+	  	  	this.items[i].checked = false;
+	  	  }
+
+	  	  if(this.items[dataIndex]!=undefined){
+	  	    this.items[dataIndex].checked = true;
+	  	  }
+
+	  	  console.log(this.items);
+	  	}
+	  }
+
+	  customElements.define(RadioboxList.is, RadioboxList);
+	</script>
+</dom-module>

@@ -1,0 +1,94 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../../bower_components/neon-animation/web-animations.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="top-header">
+	<template>
+	  <style include="shared-styles">
+	    :host {
+	      width: 100%;
+	    }
+
+	  	.toolbar {
+	  	  @apply --layout-horizontal;	
+	  	  @apply --layout-justified;  	  
+	  	  background-color: #2f4050;
+	  	}
+
+	  	.toolbar .leftBtns {
+	  	  @apply --layout-horizontal;	  		
+	  	}
+
+	  	.toolbar .rightBtns {
+	  	  @apply --layout-horizontal;		  
+	  	}
+
+	  	.toolbar .title {
+	  	  color: #fff;		
+	  	  font-size: 24px;
+	  	}
+
+	  	.toolbar paper-icon-button {
+	  	  width: 50px;
+	  	  color: #fff;
+	  	  border: 1px solid rgba(167,177,194, 0.4);
+	  	  border-radius: 5px;
+	  	  margin: 3px;
+	  	  margin-right: 5px;
+	  	}
+
+	  	paper-tooltip {	  	  
+	  	  --paper-tooltip-background: #2f4050;
+      	  --paper-tooltip-text-color: #fff;
+      	  --paper-tooltip: {
+      	  	font-size: 15px;
+      	  	border-radius: 8px;      	  	
+      	  }
+	  	}
+	  </style>
+	  
+	  <app-toolbar class="toolbar">	    
+	    <div class="leftBtns">
+	      <paper-icon-button id="btnPen" icon="create"></paper-icon-button>
+	      <paper-icon-button id="btnInvert" icon="invert-colors"></paper-icon-button>
+	      <paper-icon-button id="btnReset" icon="restore"></paper-icon-button>
+	      <paper-icon-button id="btnReport" icon="error"></paper-icon-button>
+	    </div>
+	    <div class="title">Pneumonia</div>
+	    <div class="rightBtns">
+	      <paper-icon-button id="btnClear" icon="delete"></paper-icon-button>
+	      <paper-icon-button id="btnPrev" icon="arrow-back"></paper-icon-button>
+	      <paper-icon-button id="btnNext" icon="arrow-forward"></paper-icon-button>
+	      <paper-icon-button id="btnLogout" icon="exit-to-app"></paper-icon-button>
+	    </div>
+	  </app-toolbar>
+
+	  <!-- tootip for buttons -->
+	  <paper-tooltip for="btnPen" position="bottom" animation-delay="0">Pen Mode</paper-tooltip>
+	  <paper-tooltip for="btnInvert" position="bottom" animation-delay="0">Invert</paper-tooltip>
+	  <paper-tooltip for="btnReset" position="bottom" animation-delay="0">Reset</paper-tooltip>
+	  <paper-tooltip for="btnReport" position="bottom" animation-delay="0">이미지에 문제가 있을시 신고하기</paper-tooltip>
+	  <paper-tooltip for="btnClear" position="bottom" animation-delay="0">Clear All</paper-tooltip>
+	  <paper-tooltip for="btnPrev" position="bottom" animation-delay="0">Previous</paper-tooltip>
+	  <paper-tooltip for="btnNext" position="bottom" animation-delay="0">Next</paper-tooltip>
+	  <paper-tooltip for="btnLogout" position="bottom" animation-delay="0">Log Out</paper-tooltip>
+	</template>
+	<script>
+	  class TopHeader extends Polymer.Element {
+	  	static get is() { return 'top-header'; }
+
+	  	static get properties() {
+  		  return {
+
+  		  };
+	  	}
+	  }
+
+	  customElements.define(TopHeader.is, TopHeader);	
+	</script>
+</dom-module>
